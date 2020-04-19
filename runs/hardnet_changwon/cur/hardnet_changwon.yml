@@ -1,0 +1,36 @@
+model:
+    arch: hardnet
+data:
+    dataset: add
+    train_split: demo_train
+    val_split: demo_val
+    img_rows: 512
+    img_cols: 512
+    path: /workspace/jihun/yswang/Demo/Demo/FCHarDNet/data
+    sbd_path: /workspace/jihun/yswang/Demo/Demo/FCHarDNet/data
+
+
+training:
+    train_iters: 100
+    batch_size: 1
+    val_interval: 50
+    n_workers: 8
+    print_interval: 10
+    augmentations:
+        hflip: 0.5
+        rscale_crop: [512, 512]
+    optimizer:
+        name: 'sgd'
+        lr: 0.02
+        weight_decay: 0.0005
+        momentum: 0.9
+    loss:
+        name: 'bootstrapped_cross_entropy'
+        min_K: 4096
+        loss_th: 0.3
+        size_average: True
+    lr_schedule: 
+        name: 'poly_lr'
+        max_iter: 90000
+    resume: None
+    finetune: None    
